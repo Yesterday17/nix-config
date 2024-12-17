@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, pkgs-unstable, lib, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -189,6 +189,57 @@
         #no_gaps_when_only = true;
         mfact = 0.7;
       };
+    };
+  };
+
+  programs.zed-editor = {
+    enable = true;
+    package = pkgs-unstable.zed-editor;
+    extensions = ["nix" "toml"];
+
+    userSettings = {
+      assistant = {
+        enable = true;
+        version = "2";
+        default_open_ai_model = null;
+
+        default_model = { 
+          provider = "zed.dev";
+          model = "claude-3-5-sonnet-latest";
+        };
+      };
+      node = {
+        path = lib.getExe pkgs.nodejs;
+        npm_path = lib.getExe' pkgs.nodejs "npm";
+      };
+
+      hour_format = "hour24";
+      auto_update = false;
+
+      lsp = {
+        rust-analyzer = {
+          binary = {
+            # path = lib.getExe pkgs.rust-analyzer;
+            path_lookup = true;
+          };
+        };
+        nix = { 
+          binary = { 
+            path_lookup = true; 
+          }; 
+        };
+      };
+      vim_mode = true;
+      load_direnv = "shell_hook";
+      base_keymap = "VSCode";
+      theme = {
+        mode = "system";
+        light = "Solarized Light";
+        dark = "Solarized Dark";
+      };
+      show_whitespaces = "all" ;
+      ui_font_size = 16;
+      buffer_font_size = 16;
     };
   };
 }
