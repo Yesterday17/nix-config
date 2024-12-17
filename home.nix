@@ -21,12 +21,8 @@
     jdk17
   ];
   programs.bash.enable = true;
-  programs.zsh = {
-    enable = true;
-  };
-  programs.nushell = {
-    enable = true;
-  };
+  programs.zsh = { enable = true; };
+  programs.nushell = { enable = true; };
 
   programs.git = {
     enable = true;
@@ -38,9 +34,7 @@
     };
   };
 
-  programs.vscode = {
-    enable = true;
-  };
+  programs.vscode = { enable = true; };
 
   services.gpg-agent = {
     enable = true;
@@ -48,9 +42,7 @@
     enableSshSupport = true;
   };
 
-  programs.kitty = {
-    enable = true;
-  };
+  programs.kitty = { enable = true; };
 
   programs.waybar = {
     enable = true;
@@ -62,13 +54,11 @@
         layer = "top";
         position = "top";
         height = 30;
-        output = [
-          "DP-4"
-          "DP-5"
-        ];
-        modules-left = ["hyprland/workspaces" "hyprland/submap" "wlr/taskbar"];
-        modules-center = [];
-        modules-right = ["temperature"];
+        output = [ "DP-4" "DP-5" ];
+        modules-left =
+          [ "hyprland/workspaces" "hyprland/submap" "wlr/taskbar" ];
+        modules-center = [ ];
+        modules-right = [ "temperature" ];
 
         "hyprland/workspaces" = {
           disable-scroll = true;
@@ -78,9 +68,7 @@
     };
   };
 
-  programs.wofi = {
-    enable = true;
-  };
+  programs.wofi = { enable = true; };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -134,36 +122,31 @@
 
       # Using ALT as $mod
       "$mod" = "CTRL";
-      bind =
-        [
-          "$mod SHIFT, K, exec, kitty"
-          "$mod, Q, killactive"
-          # "$mod, M, exit"
-          "$mod, E, exec, dolphin"
-          "$mod SHIFT, V, togglefloating"
-          "$mod SHIFT, S, exec, hyprshot --mode=region --clipboard-only"
+      bind = [
+        "$mod SHIFT, K, exec, kitty"
+        "$mod, Q, killactive"
+        # "$mod, M, exit"
+        "$mod, E, exec, dolphin"
+        "$mod SHIFT, V, togglefloating"
+        "$mod SHIFT, S, exec, hyprshot --mode=region --clipboard-only"
 
-          # "$mod, L, "
-          "$mod SHIFT, J, layoutmsg, cyclenext"
-          "$mod SHIFT, K, layoutmsg, cycleprev"
-          "$mod SHIFT, L, layoutmsg, swapwithmaster master"
-          "$mod SHIFT, M, fullscreen"
-          "$mod SHIFT, N, layoutmsg, orientationcycle"
+        # "$mod, L, "
+        "$mod SHIFT, J, layoutmsg, cyclenext"
+        "$mod SHIFT, K, layoutmsg, cycleprev"
+        "$mod SHIFT, L, layoutmsg, swapwithmaster master"
+        "$mod SHIFT, M, fullscreen"
+        "$mod SHIFT, N, layoutmsg, orientationcycle"
 
-          "$mod, space, exec, pkill wofi || wofi --show drun"
-        ]
-        ++ (
-          # workspaces
-          # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-          builtins.concatLists (builtins.genList (i:
-              let ws = i + 1;
-              in [
-                "$mod, code:1${toString i}, workspace, ${toString ws}"
-                "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-              ]
-            )
-            9)
-        );
+        "$mod, space, exec, pkill wofi || wofi --show drun"
+      ] ++ (
+        # workspaces
+        # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
+        builtins.concatLists (builtins.genList (i:
+          let ws = i + 1;
+          in [
+            "$mod, code:1${toString i}, workspace, ${toString ws}"
+            "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+          ]) 9));
       # https://github.com/hyprwm/Hyprland/blob/3cec45d82113051d35e846e5d80719d8ea0f7002/example/hyprland.conf#L134-L145
       # TODO: use loop
       # workspace = [
@@ -172,9 +155,7 @@
       #   "f[1], gapsout:0, gapsin:0"
       # ];
 
-      layerrule = [
-        "noanim, wofi"
-      ];
+      layerrule = [ "noanim, wofi" ];
       # windowrulev2 = [
       #   "bordersize 0, floating:0, onworkspace:w[t1]"
       #   "rounding 0, floating:0, onworkspace:w[t1]"
@@ -195,7 +176,7 @@
   programs.zed-editor = {
     enable = true;
     package = pkgs-unstable.zed-editor;
-    extensions = ["nix" "toml"];
+    extensions = [ "nix" "toml" ];
 
     userSettings = {
       assistant = {
@@ -203,7 +184,7 @@
         version = "2";
         default_open_ai_model = null;
 
-        default_model = { 
+        default_model = {
           provider = "zed.dev";
           model = "claude-3-5-sonnet-latest";
         };
@@ -223,11 +204,7 @@
             path_lookup = true;
           };
         };
-        nix = { 
-          binary = { 
-            path_lookup = true; 
-          }; 
-        };
+        nix = { binary = { path_lookup = true; }; };
       };
       vim_mode = true;
       load_direnv = "shell_hook";
@@ -237,7 +214,7 @@
         light = "Solarized Light";
         dark = "Solarized Dark";
       };
-      show_whitespaces = "all" ;
+      show_whitespaces = "all";
       ui_font_size = 16;
       buffer_font_size = 16;
     };

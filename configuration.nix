@@ -6,13 +6,12 @@
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./services/gnupg.nix
-      #<home-manager/nixos>
-      #<plasma-manager/modules>
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./services/gnupg.nix
+    #<home-manager/nixos>
+    #<plasma-manager/modules>
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -24,9 +23,7 @@
 
   # nvidia
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.graphics = {
-    enable = true;
-  };
+  hardware.graphics = { enable = true; };
   hardware.bluetooth.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
@@ -68,18 +65,14 @@
     type = "fcitx5";
     fcitx5.waylandFrontend = true;
     #fcitx5.plasma6Support = true;
-    fcitx5.addons = with pkgs; [
-      rime-data
-      fcitx5-gtk
-      fcitx5-rime
-    ];
+    fcitx5.addons = with pkgs; [ rime-data fcitx5-gtk fcitx5-rime ];
   };
 
   # Enable the X11 windowing system.
   # Enable the KDE Plasma Desktop Environment.
   services.xserver = {
     enable = true;
-    
+
     desktopManager.plasma5.enable = true;
   };
   services.displayManager.sddm = {
@@ -130,7 +123,7 @@
     packages = with pkgs; [
       kdePackages.kate
       mumble
-    #  thunderbird
+      #  thunderbird
     ];
     shell = pkgs.zsh;
   };
@@ -138,21 +131,17 @@
   programs.zsh.enable = true;
   programs.firefox.enable = true;
 
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      #  wget
+    ];
 
-  environment.variables = {
-    __GL_THREADED_OPTIMIZATIONS = "0";
-  };
+  environment.variables = { __GL_THREADED_OPTIMIZATIONS = "0"; };
 
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
+  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -168,7 +157,7 @@
     AllowHibernation=no
     AllowHybridSleep=no
     AllowSuspendThenHibernate=no
-'';
+  '';
 
   fonts.packages = with pkgs; [
     noto-fonts

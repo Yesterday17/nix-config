@@ -19,17 +19,19 @@
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, ... }: {
     packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
     packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
 
     nixosConfigurations.nixos = let
       system = "x86_64-linux";
-      special-args = { 
+      special-args = {
         inherit inputs;
 
         pkgs-unstable = import nixpkgs-unstable {
-          system = sys;
+          inherit system;
           config.allowUnfree = true;
         };
-      }; in nixpkgs.lib.nixosSystem rec {
+      };
+    in nixpkgs.lib.nixosSystem rec {
       inherit system;
 
       specialArgs = special-args;
