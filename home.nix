@@ -78,6 +78,10 @@
     };
   };
 
+  programs.wofi = {
+    enable = true;
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
@@ -145,6 +149,8 @@
           "$mod SHIFT, L, layoutmsg, swapwithmaster master"
           "$mod SHIFT, M, fullscreen"
           "$mod SHIFT, N, layoutmsg, orientationcycle"
+
+          "$mod, space, exec, pkill wofi || wofi --show drun"
         ]
         ++ (
           # workspaces
@@ -158,7 +164,6 @@
             )
             9)
         );
-
       # https://github.com/hyprwm/Hyprland/blob/3cec45d82113051d35e846e5d80719d8ea0f7002/example/hyprland.conf#L134-L145
       # TODO: use loop
       # workspace = [
@@ -167,6 +172,9 @@
       #   "f[1], gapsout:0, gapsin:0"
       # ];
 
+      layerrule = [
+        "noanim, wofi"
+      ];
       # windowrulev2 = [
       #   "bordersize 0, floating:0, onworkspace:w[t1]"
       #   "rounding 0, floating:0, onworkspace:w[t1]"
