@@ -132,7 +132,7 @@
       "$rawMod" = "ALT";
       bind = [
         "$mod SHIFT, K, exec, kitty"
-        "$mod, Q, closewindow" # killactive
+        "$mod, Q, killactive"
         # "$mod, M, exit"
         "$mod, E, exec, dolphin"
         "$mod SHIFT, V, togglefloating"
