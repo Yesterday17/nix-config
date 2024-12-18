@@ -13,7 +13,6 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
-    # xremap-flake.url = "github:xremap/nix-flake";
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, ... }: {
@@ -48,8 +47,6 @@
           home-manager.users.yesterday17 = import ./home.nix;
         }
 
-        # xremap
-        # inputs.xremap-flake.nixosModules.default
         ./keyd.nix
       ];
     };
