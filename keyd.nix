@@ -38,6 +38,7 @@
             # Used as `$rawMod` in hyprland
             l = "A-l";
             tab = "A-tab";
+            space = "A-space";
           };
           "caps_super:M" = {
             #
