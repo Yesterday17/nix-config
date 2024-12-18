@@ -19,7 +19,14 @@
     telegram-desktop
     prismlauncher
     jdk17
+
+    # Required by Zed-Editor
+    #
+    # TODO: use extraPackages
+    # https://github.com/nix-community/home-manager/blob/master/modules/programs/zed-editor.nix
+    nixd
   ];
+
   programs.bash.enable = true;
   programs.zsh = { enable = true; };
   programs.nushell = { enable = true; };
@@ -176,7 +183,29 @@
   programs.zed-editor = {
     enable = true;
     package = pkgs-unstable.zed-editor;
-    extensions = [ "nix" "toml" ];
+    # extraPackages = with pkgs; [
+    #   nixd
+    #   nodejs
+    # ];
+    extensions = [
+      "nix"
+      "toml"
+      "html"
+      "dockerfile"
+      "git-firefly"
+      "sql"
+      "svelte"
+      "emmet"
+      "astro"
+      "graphql"
+      "prisma"
+      "biome" # not working
+      "xml"
+      "log"
+
+      "tokyo-night"
+      "night-owl-theme"
+    ];
 
     userSettings = {
       assistant = {
@@ -215,8 +244,16 @@
         dark = "Solarized Dark";
       };
       show_whitespaces = "all";
+
+      # ui_font_family = "Zed Plex Mono";
+      ui_font_family = "JetBrains Mono";
       ui_font_size = 16;
+
+      buffer_font_family = "JetBrains Mono";
       buffer_font_size = 16;
+      buffer_font_features = {
+        calt = true;
+      };
     };
   };
 }
