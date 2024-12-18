@@ -33,6 +33,11 @@
             v = "S-insert";
             # Cut
             x = "S-delete";
+
+            # Some shortcuts are not mapped to Ctrl-*
+            # Used as `$rawMod` in hyprland
+            l = "A-l";
+            tab = "A-tab";
           };
           "caps_super:M" = {
             #

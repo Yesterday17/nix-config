@@ -129,18 +129,20 @@
 
       # Using ALT as $mod
       "$mod" = "CTRL";
+      "$rawMod" = "ALT";
       bind = [
         "$mod SHIFT, K, exec, kitty"
-        "$mod, Q, killactive"
+        "$mod, Q, closewindow" # killactive
         # "$mod, M, exit"
         "$mod, E, exec, dolphin"
         "$mod SHIFT, V, togglefloating"
         "$mod SHIFT, S, exec, hyprshot --mode=region --clipboard-only"
 
-        # "$mod, L, "
-        "$mod SHIFT, J, layoutmsg, cyclenext"
-        "$mod SHIFT, K, layoutmsg, cycleprev"
-        "$mod SHIFT, L, layoutmsg, swapwithmaster master"
+        "$rawMod, Tab, layoutmsg, cyclenext"
+        "$rawMod SHIFT, Tab, layoutmsg, cycleprev"
+        "$rawMod, L, layoutmsg, swapwithmaster master"
+
+        # "$mod, mouse_down, workspace, e-1"
         "$mod SHIFT, M, fullscreen"
         "$mod SHIFT, N, layoutmsg, orientationcycle"
 
@@ -163,6 +165,9 @@
       # ];
 
       layerrule = [ "noanim, wofi" ];
+      windowrulev2 = [
+        "noanim, class:^.*(pinentry).*$"
+      ];
       # windowrulev2 = [
       #   "bordersize 0, floating:0, onworkspace:w[t1]"
       #   "rounding 0, floating:0, onworkspace:w[t1]"
