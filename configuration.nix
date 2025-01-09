@@ -86,7 +86,6 @@
     enable = true;
     type = "fcitx5";
     fcitx5.waylandFrontend = true;
-    #fcitx5.plasma6Support = true;
     fcitx5.addons = with pkgs; [
       rime-data
       fcitx5-gtk
@@ -177,14 +176,24 @@
     AllowSuspendThenHibernate=no
   '';
 
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-emoji
-    jetbrains-mono
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+      jetbrains-mono
 
-    nerd-fonts.jetbrains-mono
-  ];
+      nerd-fonts.jetbrains-mono
+    ];
+
+    fontconfig = {
+      useEmbeddedBitmaps = true;
+      defaultFonts = {
+        monospace = [ "JetBrains Mono" ];
+      };
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

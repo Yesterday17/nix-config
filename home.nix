@@ -285,8 +285,8 @@
       };
       show_whitespaces = "all";
 
-      # ui_font_family = "Zed Plex Mono";
-      ui_font_family = "JetBrains Mono";
+      ui_font_family = "Zed Plex Mono";
+      # ui_font_family = "JetBrains Mono";
       ui_font_size = 16;
 
       buffer_font_family = "JetBrains Mono";
@@ -295,5 +295,10 @@
         calt = true;
       };
     };
+  };
+
+  programs.chromium = {
+    enable = true;
+    package = pkgs.google-chrome;
   };
 }

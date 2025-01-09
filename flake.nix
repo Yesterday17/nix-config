@@ -14,42 +14,45 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, ... }: let 
-    inherit (self) outputs;in {
-    packages.x86_64-linux.larksuite = nixpkgs.callPackage ./lark.nix {};
-    # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-    packages.x86_64-linux.default = self.packages.x86_64-linux.larksuite;
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
+  outputs =
+    inputs@{ self, nixpkgs, ... }:
+    let
+      inherit (self) outputs;
+    in
+    {
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
 
-    # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
+      # Your custom packages and modifications, exported as overlays
+      overlays = import ./overlays { inherit inputs; };
 
-    nixosConfigurations.nixos = let
-      system = "x86_64-linux";
-      specialArgs = {
-        inherit inputs outputs;
-      };
-    in nixpkgs.lib.nixosSystem rec {
-      inherit system specialArgs;
-
-      modules = [
-        ./configuration.nix
-        ./desktop/hyprland.nix
-        ./desktop/kde5.nix
-
-        # home-manager
-        inputs.home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = specialArgs;
-            users.yesterday17 = import ./home.nix;
+      nixosConfigurations.nixos =
+        let
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs outputs;
           };
-        }
+        in
+        nixpkgs.lib.nixosSystem rec {
+          inherit system specialArgs;
 
-        ./keyd.nix
-      ];
+          modules = [
+            ./configuration.nix
+            ./desktop/hyprland.nix
+            ./desktop/kde5.nix
+
+            # home-manager
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = specialArgs;
+                users.yesterday17 = import ./home.nix;
+              };
+            }
+
+            ./keyd.nix
+          ];
+        };
     };
-  };
 }

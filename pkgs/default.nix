@@ -2,4 +2,5 @@
 # You can build them using 'nix build .#example'
 pkgs: {
   larksuite = pkgs.callPackage ./larksuite.nix { };
+  zed-editor = pkgs.callPackage ./zed { };
 }
