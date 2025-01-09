@@ -37,8 +37,18 @@
             # Some shortcuts are not mapped to Ctrl-*
             # Used as `$rawMod` in hyprland
             l = "A-l";
-            tab = "A-tab";
             space = "A-space";
+
+            # on hyprland:
+            # tab = "A-tab";
+            # on kde:
+            tab = "swapm(app_switch_state, A-tab)";
+          };
+          "app_switch_state:A" = {
+            "tab" = "A-tab";
+            "right" = "A-tab";
+            "`" = "A-S-tab";
+            "esc" = "A-S-tab";
           };
           "caps_super:M" = {
             #

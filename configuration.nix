@@ -133,9 +133,9 @@
       "wheel"
     ];
     packages = with pkgs; [
-      kdePackages.kate
       mumble
       larksuite
+      code-cursor
       #  thunderbird
     ];
     shell = pkgs.zsh;
