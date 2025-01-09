@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ inputs, outputs, config, pkgs, ... }:
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -12,6 +12,16 @@
     #<home-manager/nixos>
     #<plasma-manager/modules>
   ];
+  
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+    ];
+    # Allow unfree packages
+    config.allowUnfree = true;
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -69,20 +79,7 @@
   };
 
   # Enable the X11 windowing system.
-  # Enable the KDE Plasma Desktop Environment.
-  services.xserver = {
-    enable = true;
-
-    desktopManager.plasma5.enable = true;
-  };
-  services.displayManager.sddm = {
-    enable = true;
-    #enableHidpi = true;
-    #wayland.enable = true;
-  };
-  # services.displayManager.sddm.enable = true;
-  #services.displayManager.sddm.wayland.enable = true;
-  #services.desktopManager.plasma6.enable = true;
+  services.xserver.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -94,7 +91,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -112,9 +109,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.yesterday17 = {
     isNormalUser = true;
@@ -123,6 +117,7 @@
     packages = with pkgs; [
       kdePackages.kate
       mumble
+      larksuite
       #  thunderbird
     ];
     shell = pkgs.zsh;
@@ -165,7 +160,7 @@
     noto-fonts-emoji
     jetbrains-mono
 
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
   ];
 
   # Open ports in the firewall.

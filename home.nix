@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, pkgs-unstable, lib, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -187,7 +187,7 @@
 
   programs.zed-editor = {
     enable = true;
-    package = pkgs-unstable.zed-editor;
+    package = pkgs.zed-editor;
     # extraPackages = with pkgs; [
     #   nixd
     #   nodejs

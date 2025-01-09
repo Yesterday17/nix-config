@@ -2,10 +2,9 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    home-manager.url = "github:nix-community/home-manager/release-24.11";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/Hyprland";
@@ -15,36 +14,38 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, ... }: {
-    packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-    packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
+  outputs = inputs@{ self, nixpkgs, ... }: let 
+    inherit (self) outputs;in {
+    packages.x86_64-linux.larksuite = nixpkgs.callPackage ./lark.nix {};
+    # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
+    packages.x86_64-linux.default = self.packages.x86_64-linux.larksuite;
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
+
+    # Your custom packages and modifications, exported as overlays
+    overlays = import ./overlays {inherit inputs;};
 
     nixosConfigurations.nixos = let
       system = "x86_64-linux";
-      special-args = {
-        inherit inputs;
-
-        pkgs-unstable = import nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
-        };
+      specialArgs = {
+        inherit inputs outputs;
       };
     in nixpkgs.lib.nixosSystem rec {
-      inherit system;
+      inherit system specialArgs;
 
-      specialArgs = special-args;
       modules = [
         ./configuration.nix
         ./desktop/hyprland.nix
+        ./desktop/kde5.nix
 
         # home-manager
         inputs.home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = special-args;
-          home-manager.users.yesterday17 = import ./home.nix;
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = specialArgs;
+            users.yesterday17 = import ./home.nix;
+          };
         }
 
         ./keyd.nix
