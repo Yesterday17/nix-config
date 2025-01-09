@@ -136,6 +136,7 @@
       mumble
       larksuite
       code-cursor
+      navicat
       #  thunderbird
     ];
     shell = pkgs.zsh;

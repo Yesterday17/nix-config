@@ -3,4 +3,5 @@
 pkgs: {
   larksuite = pkgs.callPackage ./larksuite.nix { };
   zed-editor = pkgs.callPackage ./zed { };
+  navicat = pkgs.callPackage ./navicat.nix { };
 }
