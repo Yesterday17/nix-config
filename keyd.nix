@@ -56,9 +56,9 @@
     # config.keymap = [
     #   {
     #     name = "Alt-C";
-    #     remap = { 
+    #     remap = {
     #       "M-c" = "C-c";
-    #       "M-v" = "C-v"; 
+    #       "M-v" = "C-v";
     #       "M-z" = "C-z";
     #       "M-x" = "C-x";
     #       "M-t" = "C-t";

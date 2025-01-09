@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   programs.gnupg.agent = {
@@ -9,7 +14,10 @@
   # Required to operate on smartcard
   services.pcscd.enable = true;
 
-  environment.systemPackages = with pkgs; [ gnupg yubikey-personalization ];
+  environment.systemPackages = with pkgs; [
+    gnupg
+    yubikey-personalization
+  ];
 
   environment.shellInit = ''
     gpg-connect-agent /bye
@@ -18,4 +26,3 @@
 
   services.udev.packages = with pkgs; [ yubikey-personalization ];
 }
-

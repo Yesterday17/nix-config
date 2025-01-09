@@ -2,17 +2,27 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, outputs, config, pkgs, ... }:
+{
+  inputs,
+  outputs,
+  config,
+  pkgs,
+  ...
+}:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  imports = [ # Include the results of the hardware scan.
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./services/gnupg.nix
     #<home-manager/nixos>
     #<plasma-manager/modules>
   ];
-  
+
   nixpkgs = {
     overlays = [
       outputs.overlays.additions
@@ -33,7 +43,9 @@
 
   # nvidia
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.graphics = { enable = true; };
+  hardware.graphics = {
+    enable = true;
+  };
   hardware.bluetooth.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
@@ -75,7 +87,11 @@
     type = "fcitx5";
     fcitx5.waylandFrontend = true;
     #fcitx5.plasma6Support = true;
-    fcitx5.addons = with pkgs; [ rime-data fcitx5-gtk fcitx5-rime ];
+    fcitx5.addons = with pkgs; [
+      rime-data
+      fcitx5-gtk
+      fcitx5-rime
+    ];
   };
 
   # Enable the X11 windowing system.
@@ -113,7 +129,10 @@
   users.users.yesterday17 = {
     isNormalUser = true;
     description = "Yesterday17";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       kdePackages.kate
       mumble
@@ -128,15 +147,19 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs;
-    [
-      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      #  wget
-    ];
+  environment.systemPackages = with pkgs; [
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    nixfmt-rfc-style
+    #  wget
+  ];
 
-  environment.variables = { __GL_THREADED_OPTIMIZATIONS = "0"; };
+  environment.variables = {
+    __GL_THREADED_OPTIMIZATIONS = "0";
+  };
 
-  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

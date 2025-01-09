@@ -1,4 +1,10 @@
-{ inputs, config, pkgs, lib, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -28,8 +34,12 @@
   ];
 
   programs.bash.enable = true;
-  programs.zsh = { enable = true; };
-  programs.nushell = { enable = true; };
+  programs.zsh = {
+    enable = true;
+  };
+  programs.nushell = {
+    enable = true;
+  };
 
   programs.git = {
     enable = true;
@@ -41,7 +51,9 @@
     };
   };
 
-  programs.vscode = { enable = true; };
+  programs.vscode = {
+    enable = true;
+  };
 
   services.gpg-agent = {
     enable = true;
@@ -49,7 +61,9 @@
     enableSshSupport = true;
   };
 
-  programs.kitty = { enable = true; };
+  programs.kitty = {
+    enable = true;
+  };
 
   programs.waybar = {
     enable = true;
@@ -61,9 +75,15 @@
         layer = "top";
         position = "top";
         height = 30;
-        output = [ "DP-4" "DP-5" ];
-        modules-left =
-          [ "hyprland/workspaces" "hyprland/submap" "wlr/taskbar" ];
+        output = [
+          "DP-4"
+          "DP-5"
+        ];
+        modules-left = [
+          "hyprland/workspaces"
+          "hyprland/submap"
+          "wlr/taskbar"
+        ];
         modules-center = [ ];
         modules-right = [ "temperature" ];
 
@@ -75,7 +95,9 @@
     };
   };
 
-  programs.wofi = { enable = true; };
+  programs.wofi = {
+    enable = true;
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -130,32 +152,41 @@
       # Using ALT as $mod
       "$mod" = "CTRL";
       "$rawMod" = "ALT";
-      bind = [
-        "$mod SHIFT, K, exec, kitty"
-        "$mod, Q, killactive"
-        # "$mod, M, exit"
-        "$mod, E, exec, dolphin"
-        "$mod SHIFT, V, togglefloating"
-        "$mod SHIFT, S, exec, hyprshot --mode=region --clipboard-only"
+      bind =
+        [
+          "$mod SHIFT, K, exec, kitty"
+          "$mod, Q, killactive"
+          # "$mod, M, exit"
+          "$mod, E, exec, dolphin"
+          "$mod SHIFT, V, togglefloating"
+          "$mod SHIFT, S, exec, hyprshot --mode=region --clipboard-only"
 
-        "$rawMod, Tab, layoutmsg, cyclenext"
-        "$rawMod SHIFT, Tab, layoutmsg, cycleprev"
-        "$rawMod, L, layoutmsg, swapwithmaster master"
+          "$rawMod, Tab, layoutmsg, cyclenext"
+          "$rawMod SHIFT, Tab, layoutmsg, cycleprev"
+          "$rawMod, L, layoutmsg, swapwithmaster master"
 
-        # "$mod, mouse_down, workspace, e-1"
-        "$mod SHIFT, M, fullscreen"
-        "$mod SHIFT, N, layoutmsg, orientationcycle"
+          # "$mod, mouse_down, workspace, e-1"
+          "$mod SHIFT, M, fullscreen"
+          "$mod SHIFT, N, layoutmsg, orientationcycle"
 
-        "$rawMod, space, exec, pkill wofi || wofi --show drun"
-      ] ++ (
-        # workspaces
-        # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-        builtins.concatLists (builtins.genList (i:
-          let ws = i + 1;
-          in [
-            "$mod, code:1${toString i}, workspace, ${toString ws}"
-            "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-          ]) 9));
+          "$rawMod, space, exec, pkill wofi || wofi --show drun"
+        ]
+        ++ (
+          # workspaces
+          # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
+          builtins.concatLists (
+            builtins.genList (
+              i:
+              let
+                ws = i + 1;
+              in
+              [
+                "$mod, code:1${toString i}, workspace, ${toString ws}"
+                "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+              ]
+            ) 9
+          )
+        );
       # https://github.com/hyprwm/Hyprland/blob/3cec45d82113051d35e846e5d80719d8ea0f7002/example/hyprland.conf#L134-L145
       # TODO: use loop
       # workspace = [
@@ -238,7 +269,11 @@
             path_lookup = true;
           };
         };
-        nix = { binary = { path_lookup = true; }; };
+        nix = {
+          binary = {
+            path_lookup = true;
+          };
+        };
       };
       vim_mode = true;
       load_direnv = "shell_hook";
