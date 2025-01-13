@@ -19,6 +19,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./services/gnupg.nix
+    ./services/kde-connect.nix
     #<home-manager/nixos>
     #<plasma-manager/modules>
   ];
@@ -82,12 +83,16 @@
     LC_TIME = "zh_CN.UTF-8";
   };
 
+  # Move to home-manger once the following PR was merged
+  # https://github.com/nix-community/home-manager/issues/5264
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
     fcitx5.waylandFrontend = true;
+    fcitx5.plasma6Support = true;
     fcitx5.addons = with pkgs; [
       rime-data
+      fcitx5-mozc
       fcitx5-gtk
       fcitx5-rime
     ];
@@ -183,14 +188,30 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
+      source-han-sans
       jetbrains-mono
 
       nerd-fonts.jetbrains-mono
     ];
 
     fontconfig = {
+      antialias = true;
+
+      hinting = {
+        enable = true;
+        style = "full";
+        autohint = true;
+      };
+
+      subpixel = {
+        # Makes it bolder
+        rgba = "rgb";
+        lcdfilter = "default"; # no difference
+      };
+
       useEmbeddedBitmaps = true;
       defaultFonts = {
+        # serif = [ "Noto Serif" ];
         monospace = [ "JetBrains Mono" ];
       };
     };
@@ -198,7 +219,11 @@
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedUDPPorts = [
+    59100
+    59200
+    59716
+  ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

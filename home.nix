@@ -285,8 +285,7 @@
       };
       show_whitespaces = "all";
 
-      ui_font_family = "Zed Plex Mono";
-      # ui_font_family = "JetBrains Mono";
+      ui_font_family = "IBM Plex Mono";
       ui_font_size = 16;
 
       buffer_font_family = "JetBrains Mono";
@@ -304,5 +303,8 @@
       "--enable-features=UseOzonePlatform"
       "--ozone-platform=wayland"
     ];
+  };
+  programs.ghostty = {
+    enable = true;
   };
 }
