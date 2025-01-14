@@ -1,11 +1,13 @@
 { ... }:
 {
   imports = [
-    ./dressing.nix # UI beautify
     ./theme.nix
+    ./dressing.nix # UI beautify
+    ./which-key.nix
+    ./telescope.nix
   ];
 
-  options = {
+  programs.nixvim.opts = {
     number = true;
     relativenumber = true;
 

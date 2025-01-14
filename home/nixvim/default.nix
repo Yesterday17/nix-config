@@ -6,6 +6,7 @@
     ./layout
     ./ui
     ./plugins
+    ./languages
   ];
 
   programs.nixvim = {
