@@ -7,6 +7,10 @@
 }:
 
 {
+  imports = [
+    ./home/nixvim
+  ];
+
   nixpkgs.config.allowUnfree = true;
 
   home.username = "yesterday17";
