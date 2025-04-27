@@ -31,7 +31,10 @@
       outputs.overlays.unstable-packages
     ];
     # Allow unfree packages
-    config.allowUnfree = true;
+    config = {
+      allowUnfree = true;
+      # cudaSupport = true;
+    };
   };
 
   # Bootloader.
@@ -139,9 +142,10 @@
     ];
     packages = with pkgs; [
       mumble
-      larksuite
+      # larksuite
       code-cursor
       navicat
+      # llama-cpp
       #  thunderbird
     ];
     shell = pkgs.zsh;
@@ -149,6 +153,7 @@
 
   programs.zsh.enable = true;
   programs.firefox.enable = true;
+  programs.nix-ld.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -195,19 +200,19 @@
     ];
 
     fontconfig = {
-      antialias = true;
+      antialias = false;
 
       hinting = {
-        enable = true;
+        enable = false;
         style = "full";
-        autohint = true;
+        autohint = false;
       };
 
-      subpixel = {
-        # Makes it bolder
-        rgba = "rgb";
-        lcdfilter = "default"; # no difference
-      };
+      # subpixel = {
+      #   # Makes it bolder
+      #   rgba = "rgb";
+      #   lcdfilter = "default"; # no difference
+      # };
 
       useEmbeddedBitmaps = true;
       defaultFonts = {

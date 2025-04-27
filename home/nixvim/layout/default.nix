@@ -1,9 +1,9 @@
 { ... }:
 {
   imports = [
-    ./explorer.nix
-    ./status-bar.nix
     ./tabline.nix
+    ./status-bar.nix
+    ./explorer.nix
     ./terminal.nix
   ];
 }

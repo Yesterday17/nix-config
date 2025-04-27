@@ -7,11 +7,13 @@
     ./telescope.nix
   ];
 
-  programs.nixvim.opts = {
-    number = true;
-    relativenumber = true;
+  programs.nixvim = {
+    opts = {
+      number = true;
+      relativenumber = true;
 
-    # tab width
-    shiftwidth = 2; # TODO: move to editor settings
+      # tab width
+      shiftwidth = 2; # TODO: move to editor settings
+    };
   };
 }

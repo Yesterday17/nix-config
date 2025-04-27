@@ -1,6 +1,18 @@
 { pkgs, ... }:
 {
   programs.nixvim = {
+    plugins.treesitter = {
+      enable = true;
+      settings = {
+        indent.enable = true;
+        highlight.enable = true;
+      };
+
+      folding = false;
+      grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
+      nixvimInjections = true;
+    };
+
     plugins.lsp-format.enable = true;
 
     plugins.lsp = {
@@ -29,5 +41,9 @@
     extraConfigLua = ''
       require("lspconfig").vtsls.setup({})
     '';
+
+    opts = {
+      updatetime = 100; # Faster completion
+    };
   };
 }

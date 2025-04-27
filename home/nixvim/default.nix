@@ -7,6 +7,7 @@
     ./ui
     ./plugins
     ./languages
+    ./ai
   ];
 
   programs.nixvim = {

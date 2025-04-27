@@ -30,6 +30,8 @@
     prismlauncher
     jdk17
 
+    unrar
+
     # Required by Zed-Editor
     #
     # TODO: use extraPackages
@@ -44,6 +46,11 @@
   programs.nushell = {
     enable = true;
   };
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true; # see note on other shells below
+    nix-direnv.enable = true;
+  };
 
   programs.git = {
     enable = true;
@@ -53,6 +60,7 @@
       signByDefault = true;
       key = "E730A010ECDFB4890FF198983CB3DFA9524C0B90";
     };
+    lfs.enable = true;
   };
 
   programs.vscode = {
@@ -126,7 +134,7 @@
         rounding = 10;
 
         active_opacity = 1;
-        inactive_opacity = 0.9;
+        inactive_opacity = 0.95;
 
         blur = {
           enabled = true;
@@ -222,7 +230,7 @@
 
   programs.zed-editor = {
     enable = true;
-    package = pkgs.zed-editor;
+    # package = pkgs.zed-editor;
     # extraPackages = with pkgs; [
     #   nixd
     #   nodejs
@@ -269,8 +277,8 @@
       lsp = {
         rust-analyzer = {
           binary = {
-            # path = lib.getExe pkgs.rust-analyzer;
-            path_lookup = true;
+            path = lib.getExe pkgs.rust-analyzer;
+            # path_lookup = true;
           };
         };
         nix = {
@@ -285,11 +293,11 @@
       theme = {
         mode = "system";
         light = "Solarized Light";
-        dark = "Solarized Dark";
+        dark = "One Dark";
       };
       show_whitespaces = "all";
 
-      ui_font_family = "IBM Plex Mono";
+      ui_font_family = "Zed Plex Mono";
       ui_font_size = 16;
 
       buffer_font_family = "JetBrains Mono";

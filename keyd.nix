@@ -40,7 +40,7 @@
             space = "A-space";
 
             # on hyprland:
-            # tab = "A-tab";
+	    # tab = "A-tab";
             # on kde:
             tab = "swapm(app_switch_state, A-tab)";
           };

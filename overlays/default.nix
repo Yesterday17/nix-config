@@ -11,6 +11,15 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
+
+    avante = prev.vimPlugins.avante-nvim.overrideAttrs (_: {
+      src = prev.fetchFromGitHub {
+        owner = "yetone";
+        repo = "avante.nvim";
+        rev = "bd8afce3b0cac6e3d5e1a409692975199be38b81";
+        sha256 = "sha256-wlqLxYB6QjFOf81/OjW6fg4xsAnueu+6qUmwkvMMk90=";
+      };
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

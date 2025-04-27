@@ -13,7 +13,21 @@
         from = 1714;
         to = 1764;
       }
+      {
+        from = 5353;
+        to = 5353;
+      }
     ];
     allowedUDPPortRanges = allowedTCPPortRanges;
+  };
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      workstation = true;
+      userServices = true;
+    };
   };
 }
