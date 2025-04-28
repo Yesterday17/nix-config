@@ -8,7 +8,7 @@
 
 {
   imports = [
-    ./home/nixvim
+    # ./home/nixvim
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -31,6 +31,10 @@
     jdk17
 
     unrar
+
+    nvchad
+
+    gigafile
 
     # Required by Zed-Editor
     #

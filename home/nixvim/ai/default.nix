@@ -23,7 +23,7 @@
           copilotclaude = {
             __inherited_from = "copilot";
             api_key_name = "<GITHUB_TOKEN>";
-            model = "claude-3.5-sonnet";
+            model = "claude-3.7-sonnet";
             max_tokens = 4096;
           };
         };
