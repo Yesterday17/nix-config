@@ -323,4 +323,8 @@
   programs.ghostty = {
     enable = true;
   };
+
+  programs.mpv = {
+    enable = true;
+  };
 }
