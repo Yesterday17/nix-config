@@ -1,5 +1,6 @@
 {
   inputs,
+  outputs,
   config,
   pkgs,
   lib,
@@ -8,10 +9,22 @@
 
 {
   imports = [
+    ./home/gauntlet
     # ./home/nixvim
   ];
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+    ];
+    # Allow unfree packages
+    config = {
+      allowUnfree = true;
+      # cudaSupport = true;
+    };
+  };
 
   home.username = "yesterday17";
   home.homeDirectory = "/home/yesterday17";
@@ -41,7 +54,14 @@
     # TODO: use extraPackages
     # https://github.com/nix-community/home-manager/blob/master/modules/programs/zed-editor.nix
     nixd
+
+    bruno
   ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   programs.bash.enable = true;
   programs.zsh = {

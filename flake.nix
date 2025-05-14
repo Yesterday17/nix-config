@@ -21,6 +21,10 @@
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    gauntlet = {
+      url = "github:project-gauntlet/gauntlet/v18";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -56,7 +60,6 @@
             inputs.home-manager.nixosModules.home-manager
             {
               home-manager = {
-                useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = specialArgs;
                 users.yesterday17 = import ./home.nix;
