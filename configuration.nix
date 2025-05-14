@@ -49,11 +49,12 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics = {
     enable = true;
+    extraPackages = with pkgs; [ nvidia-vaapi-driver ];
   };
   hardware.bluetooth.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
-    open = false;
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
@@ -84,21 +85,6 @@
     LC_PAPER = "zh_CN.UTF-8";
     LC_TELEPHONE = "zh_CN.UTF-8";
     LC_TIME = "zh_CN.UTF-8";
-  };
-
-  # Move to home-manger once the following PR was merged
-  # https://github.com/nix-community/home-manager/issues/5264
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5.waylandFrontend = true;
-    fcitx5.plasma6Support = true;
-    fcitx5.addons = with pkgs; [
-      rime-data
-      fcitx5-mozc
-      fcitx5-gtk
-      fcitx5-rime
-    ];
   };
 
   # Enable the X11 windowing system.
