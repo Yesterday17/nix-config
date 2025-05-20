@@ -70,7 +70,6 @@
           "$mod SHIFT, M, fullscreen"
           "$mod SHIFT, N, layoutmsg, orientationcycle"
 
-          # "$rawMod, space, exec, pkill wofi || wofi --show drun"
           "$rawMod, space, exec, albert toggle"
         ]
         ++ (
@@ -97,9 +96,13 @@
       #   "f[1], gapsout:0, gapsin:0"
       # ];
 
-      layerrule = [ "noanim, wofi" ];
+      layerrule = [
+        # "noanim, wofi"
+      ];
       windowrulev2 = [
         "noanim, class:^.*(pinentry).*$"
+        "noborder, title:^.*(Albert).*$"
+        "nodim, title:^.*(Albert).*$"
       ];
       # windowrulev2 = [
       #   "bordersize 0, floating:0, onworkspace:w[t1]"

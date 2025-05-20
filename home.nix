@@ -11,6 +11,7 @@
   imports = [
     ./home/gauntlet
     ./home/hyprland
+    ./home/fcitx5
     # ./home/nixvim
   ];
 
@@ -46,7 +47,7 @@
 
     unrar
 
-    nvchad
+    # nvchad
 
     gigafile
 
@@ -57,6 +58,9 @@
     nixd
 
     bruno
+
+    albert # Raycast alternative
+    just
   ];
 
   programs.neovim = {
@@ -132,10 +136,6 @@
     };
   };
 
-  programs.wofi = {
-    enable = true;
-  };
-
   programs.zed-editor = {
     enable = true;
     # package = pkgs.zed-editor;
@@ -161,6 +161,7 @@
 
       "tokyo-night"
       "night-owl-theme"
+      "neosolarized"
     ];
 
     userSettings = {
@@ -191,7 +192,8 @@
         };
         nix = {
           binary = {
-            path_lookup = true;
+            path = lib.getExe pkgs.nil;
+            # path_lookup = true;
           };
         };
       };
@@ -200,16 +202,18 @@
       base_keymap = "VSCode";
       theme = {
         mode = "system";
-        light = "Solarized Light";
+        light = "NeoSolarized Light";
         dark = "One Dark";
       };
       show_whitespaces = "all";
 
-      ui_font_family = "Zed Plex Mono";
+      ui_font_family = "Noto Sans Mono";
       ui_font_size = 16;
+      ui_font_weight = 500;
 
       buffer_font_family = "JetBrains Mono";
       buffer_font_size = 16;
+      buffer_font_weight = 500;
       buffer_font_features = {
         calt = true;
       };

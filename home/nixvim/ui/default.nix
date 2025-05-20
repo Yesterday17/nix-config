@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./theme.nix
+    # ./theme.nix
     ./dressing.nix # UI beautify
     ./which-key.nix
     ./telescope.nix

@@ -14,7 +14,7 @@
     enable = true;
     defaultEditor = true;
 
-    # colorschemes.dracula.enable = true;
+    colorschemes.dracula.enable = true;
     plugins.web-devicons.enable = true;
 
     diagnostics = {
