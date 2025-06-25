@@ -158,6 +158,7 @@
       "biome" # not working
       "xml"
       "log"
+      "tsgo"
 
       "tokyo-night"
       "night-owl-theme"
@@ -209,7 +210,7 @@
 
       ui_font_family = "Noto Sans Mono";
       ui_font_size = 16;
-      ui_font_weight = 500;
+      ui_font_weight = 600;
 
       buffer_font_family = "JetBrains Mono";
       buffer_font_size = 16;

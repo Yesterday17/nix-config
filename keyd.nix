@@ -37,7 +37,7 @@
             # Some shortcuts are not mapped to Ctrl-*
             # Used as `$rawMod` in hyprland
             l = "A-l";
-            f = "A-f";
+            # f = "A-f";
             j = "A-j";
             i = "A-i";
             space = "A-space";
