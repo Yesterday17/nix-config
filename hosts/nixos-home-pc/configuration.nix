@@ -20,6 +20,8 @@
     # NixOS Services
     ../../modules/nixos/services/keyd
 
+    ../../modules/common/fenix.nix
+
     # home-manager
     inputs.home-manager.nixosModules.home-manager
     {
@@ -144,7 +146,7 @@
     ];
     packages = with pkgs; [
       mumble
-      # larksuite
+      larksuite
       code-cursor
       navicat
       # llama-cpp

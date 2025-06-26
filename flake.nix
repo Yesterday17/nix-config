@@ -30,6 +30,11 @@
       url = "github:project-gauntlet/gauntlet/v18";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -39,6 +44,7 @@
     in
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
+      packages.x86_64-linux.default = inputs.fenix.packages.x86_64-linux.minimal.toolchain;
 
       # Your custom packages and modifications, exported as overlays
       overlays = import ./overlays {

@@ -48,6 +48,27 @@
         "type": "github"
       }
     },
+    "fenix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-analyzer-src": "rust-analyzer-src"
+      },
+      "locked": {
+        "lastModified": 1750833544,
+        "narHash": "sha256-e5W27mfPGiM35qr0DjTUzLHP4ET2MbvRc4HJHScw/ko=",
+        "owner": "nix-community",
+        "repo": "fenix",
+        "rev": "c3940d9ff4d37e965e5841149367234c2aad1ab6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "fenix",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -719,6 +740,7 @@
     },
     "root": {
       "inputs": {
+        "fenix": "fenix",
         "gauntlet": "gauntlet",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
@@ -727,6 +749,23 @@
         "nixvim": "nixvim",
         "nvchad4nix": "nvchad4nix",
         "plasma-manager": "plasma-manager"
+      }
+    },
+    "rust-analyzer-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1750788942,
+        "narHash": "sha256-bBSdUlEw/7xh66rtMEDg39xQUNN2VaDJIbRPIwhpFYk=",
+        "owner": "rust-lang",
+        "repo": "rust-analyzer",
+        "rev": "c68c8a81a7d2979778ae1e8ba024beacb4fff6b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rust-lang",
+        "ref": "nightly",
+        "repo": "rust-analyzer",
+        "type": "github"
       }
     },
     "systems": {
