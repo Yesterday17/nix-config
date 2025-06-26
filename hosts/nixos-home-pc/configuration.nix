@@ -25,7 +25,7 @@
     {
       home-manager = {
         useUserPackages = true;
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = { inherit inputs outputs; };
         users.yesterday17 = import ../../home/yesterday17/home.nix;
       };
       # home-manager.useGlobalPkgs = true;
