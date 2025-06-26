@@ -9,9 +9,9 @@
 
 {
   imports = [
-    ./home/gauntlet
-    ./home/hyprland
-    ./home/fcitx5
+    ../gauntlet
+    ../hyprland
+    ../fcitx5
     # ./home/nixvim
   ];
 

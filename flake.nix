@@ -12,6 +12,11 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -41,33 +46,15 @@
         pkgs = nixpkgs;
       };
 
-      nixosConfigurations.nixos =
-        let
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs outputs;
-          };
-        in
-        nixpkgs.lib.nixosSystem rec {
-          inherit system specialArgs;
-
-          modules = [
-            ./configuration.nix
-            ./desktop/hyprland.nix
-            ./desktop/kde5.nix
-
-            # home-manager
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useUserPackages = true;
-                extraSpecialArgs = specialArgs;
-                users.yesterday17 = import ./home.nix;
-              };
-            }
-
-            ./keyd.nix
-          ];
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs outputs;
         };
+
+        modules = [
+          ./hosts/nixos-home-pc/configuration.nix
+        ];
+      };
     };
 }

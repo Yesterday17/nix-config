@@ -1,7 +1,6 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   inputs,
   outputs,
@@ -9,19 +8,36 @@
   pkgs,
   ...
 }:
-
 {
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./services/gnupg.nix
-    ./services/kde-connect.nix
-    #<home-manager/nixos>
-    #<plasma-manager/modules>
+
+    # Include a desktop environment
+    ../../modules/nixos/de/hyprland
+    ../../modules/nixos/de/kde
+
+    # NixOS Services
+    ../../modules/nixos/services/keyd
+
+    # home-manager
+    inputs.home-manager.nixosModules.home-manager
+    {
+      home-manager = {
+        useUserPackages = true;
+        extraSpecialArgs = { inherit inputs; };
+        users.yesterday17 = import ../../home/yesterday17/home.nix;
+      };
+      # home-manager.useGlobalPkgs = true;
+    }
+
+    ../../services/gnupg.nix
+    ../../services/kde-connect.nix
+  ];
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
   ];
 
   nixpkgs = {
