@@ -50,6 +50,7 @@
     # nvchad
 
     gigafile
+    gemini-cli
 
     # Required by Zed-Editor
     #

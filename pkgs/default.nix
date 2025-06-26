@@ -5,5 +5,7 @@ inputs: pkgs: {
   navicat = pkgs.callPackage ./navicat.nix { };
 
   nvchad = inputs.nvchad4nix.packages."${pkgs.system}".nvchad;
+
   gigafile = pkgs.callPackage ./gigafile.nix { };
+  gemini-cli = pkgs.callPackage ./gemini-cli.nix { };
 }
